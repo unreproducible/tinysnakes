@@ -1,7 +1,48 @@
 # Tiny Snakes Lesson 1: Flash and blink
 
-picture of esp8266 goes here
+![alt text](images/esp8266_devkit_horizontal-01.png "ESP8266 Pinout")
 
+# Getting the Drivers
+
+## Linux ##
+If you are using Linux you are very likely in luck, and the drivers are very likely already compiled in, or as a module.  If you plug the board, run `dmesg` you should see something akin to the following:
+
+```
+# dmesg | tail
+[12345.67890] usb 2-2: new full-speed USB device number 8 using xhci_hcd
+[12345.67890] usb 2-2: New USB device found, idVendor=10c4, idProduct=ea60
+[12345.67890] usb 2-2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[12345.67890] usb 2-2: Product: CP2102 USB to UART Bridge Controller
+[12345.67890] usb 2-2: Manufacturer: Silicon Labs
+[12345.67890] usb 2-2: SerialNumber: 0001
+[12345.67890] usbcore: registered new interface driver cp210x
+[12345.67890] usbserial: USB Serial support registered for cp210x
+[12345.67890] cp210x 2-2:1.0: cp210x converter detected
+[12345.67890] usb 2-2: cp210x converter now attached to ttyUSB0
+
+```
+The normal NodeMCUs use the CP210x driver, there are some "v3" NodeMCUs available that are:
+
+1. Isn't really a NodeMCU
+2. Uses a different, cheaper, USB TTL chipset
+
+You should be in luck either way.  Congrats, you can move on
+
+## Windows ##
+You should grab the driver from here: <http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers>
+
+Once you’ve installed the driver, open up Device Manager, and look under ‘Ports (COM & LPT)’, you should see a ‘Silicon Labs CP210x USB to UART Bridge (COM#)’ where # is replaced with your COM port, you should remember that ‘COM#’ (mine was COM3 when I wrote this)
+
+
+## Mac OS X ##
+
+You should also grab the driver from here: <http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers>
+
+Your comm port is likely `/dev/tty.usbserial` but that's no garauntee.  Your mileage may vary.
+
+## Dreaded CH34x ##
+
+If you somehow end up with a board that uses the CH34x chipset (this should be impossible), you can snag the driver from this website (yes it's in Chinese) <http://www.wch.cn/download/CH341SER_EXE.html>
 
 # Flashing your board
 
@@ -120,11 +161,11 @@ To make it turn on, we're going to need to set up a new led object that talks to
 >>> ledext.on()
 ```
 
-Note how this time `on()` and `off()` behave as expected!  That built-in LED on pin 2 was wired backwards, but the other GPIOs behave the way they are supposed to.
+Note how this time `on()` and `off()` behave as expected!  That built-in LED on pin 2 was wired backwards, but the other GPIOs behave the way they are supposed to.  There's rhyme and reason why a designer may do this, so it's not entirely uncommon to find this.
 
 # Saving programs
 
 
 Running in interactive mode is fun for the purpose of a tutorial, but what if you want to save your program and have it run every time the board gets plugged in?  Don't worry, MicroPython sets up a file system on any device with more than 1Mbyte of storage, and you can write and store programs there.  You can [read more about the filesystem here](https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/filesystem.html). There are two special files on a MicroPython system: `boot.py` runs first and then the `main.py` script is executed (assuming the file exists, in both cases).  You can write whatever you want to these files.
 
-FIXME: more instructions here y/n?
+If you are interested in storing files, take a look at ampy from Adafruit for dealing with uploading files to the ESP8266.
