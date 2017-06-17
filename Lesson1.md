@@ -50,14 +50,34 @@ hello world!
 
 The equivalent to "hello world!" on hardware is usually "make an LED blink" so let's do that next.
 
-The boards we're using have one built-in LED.  It's on pin 2.  To talk to the LED, we're going to use a library called machine that you can import using the command `import machine`.  If you'd like to know more about what's available in the machine module, you can use the command `help(machine)` to get a list.
+The boards we're using have one built-in LED.  To talk to the LED, we're going to use a library called machine that you can import using the command `import machine`.  If you'd like to know more about what's available in the machine module, you can use the command `help(machine)` to get a list.
 
-From there, we need to declare what pin we're talking to
+From there, we need to declare what pin we're talking to.  The onboard pin on the boards we're using today is on pin 2, so we initialize something at pin 2 using `led = machine.Pin(2, machine.Pin.OUT)`
 
 ```python
 >>> import machine
->>>
+>>> led = machine.Pin(2, machine.Pin.OUT)
 ```
+
+Your LED should glow bright blue!
+FIXME: picture?
+
+Tired of being blinded by your LED?  You can also turn it on and off using `led.on()` and `led.off()` -- try it out!  You're going to notice something a little bit strange about this... What is it?
+
+Now let's write a loop to make it blink.  First, let's import a time library so that we can slow down the blinking rate to human speed using `import time` then try a basic that turns it on and off with a wait in between
+
+```python
+>>> import time
+>>> for i in range(10):
+...     led.on()
+...     time.sleep(0.5)
+...     led.off()
+...     time.sleep(0.5)
+...
+```
+
+Hit backspace to get out of the indent and start running your loop.  Notice how the `>>>` prompt doesn't come back until it's done the loop.  You can abort it earlier using control-c
+
 
 # Connect up an external LED
 
