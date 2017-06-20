@@ -168,4 +168,4 @@ Note how this time `on()` and `off()` behave as expected!  That built-in LED on 
 
 Running in interactive mode is fun for the purpose of a tutorial, but what if you want to save your program and have it run every time the board gets plugged in?  Don't worry, MicroPython sets up a file system on any device with more than 1Mbyte of storage, and you can write and store programs there.  You can [read more about the filesystem here](https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/filesystem.html). There are two special files on a MicroPython system: `boot.py` runs first and then the `main.py` script is executed (assuming the file exists, in both cases).  You can write whatever you want to these files.
 
-If you are interested in storing files, take a look at ampy from Adafruit for dealing with uploading files to the ESP8266.
+If you are interested in storing files, take a look at ampy from Adafruit for dealing with uploading files to the ESP8266. <https://learn.adafruit.com/micropython-basics-load-files-and-run-code/install-ampy>
