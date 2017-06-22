@@ -33,6 +33,9 @@ To find out what IP settings are currently set:
 ```
 
 Lets setup the client before turning off the AP
+
+Noting that in the following example `sta_if` is the station, or client, interface.  You are basically connecting to a pre-existing wifi.  You could put anything into the SSID and Password below, but unless they match the network you won't get into anything
+
 ```python
 >>> sta_if = network.WLAN(network.STA_IF)
 >>> sta_if.active(True)
