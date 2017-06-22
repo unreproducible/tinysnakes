@@ -60,7 +60,23 @@ and you won't get a nice prompt.  So your command line should look like this:
 Only you'll need to change the port to be the right one for your device. (On
 my Mac, for example, it's `/dev/tty.SLAB\_USBtoUART`)
 
+When you are done flashing, open up a serial terminal, and hit the `RST` button you Should see it boot (after a little bit of garbage) and you should get a REPL prompt.
+
+## Troubleshooting ##
+* If, when you `RST` all you get back on the serial port is garbage try some of these things:
+  * Double check and make sure that your serial port speed, parity, etc are all set correctly
+  * If your port seems correct, re-erase, and re-flash the board
+    * If it's still spewing garbage make sure that you have `-fm dio` in your flash line
+    * Make sure you have the latest esptool installed (you can snag it via git)
+    * Try slowing down the baudrate of the flash to 115200 vs. the 460800, it'll be slower, but might work better
+
+## Next ##
 Next, [follow the instructions to get a REPL prompt](https://docs.micropython.org/en/latest/esp8266/esp8266/tutorial/repl.html).
+
+Other things to note about getting a REPL prompt via serial:
+* `minicom` is a good utility for serial ports, if kinda old.
+* `screen` can be used to talk to serial ports via a command like `screen < path to dev entry> < baud rate>` or `screen /dev/ttyUSB0 115200`
+* `picocom` isn't always available, though it's kinda nice.  You might have to track it down a little if you want to use it.
 
 # Writing some Python
 
