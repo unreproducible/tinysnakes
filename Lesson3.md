@@ -16,16 +16,16 @@ When you go to hook up things to most MCUs you tend to want to take advantage of
 
 MicroPython on the ESP8266 however decided to implement I2C completely in software, which has a unique advantage: we can use just about any pins for I2C communication.  If you haven't done hardware before, this is a huge boon, and will make our lives today a little easier in setting up the BMP280
 
+`Remember to wire things up when it's NOT plugged into power.`  Doing so may result in release of magic smoke, unexpected behavior, and/or possible knowing chuckles from those who have 
+
 ## What you need to wire up ##
 Pins you'll need to wire up:
-* 3v3 to 3v3
+* 3v3 (VCC) to 3v3
 * GND to GND
 * SCL to a GPIO, note which one
 * SDA to a GPIO, note which one
 
 I used D5 and D6, but you can try others.  Noting of course some of the other pins may be in use and things may break.  This is hardware, go poke around and try things, you LIKELY won't let the magic smoke out.
-
-NOTE: Remember to wire things up when it's NOT plugged into power.
 
 ## Installing Ampy ##
 
@@ -68,6 +68,8 @@ You are ready to try accessing things, open up the serial terminal and get the R
 ```
 
 Your program should run and you are now accessing the sensor and could do things with it.
+
+The sensor we are using, the BMP280, uses the same interface as it's larger cousin the BME280, however the BMP280 does not have a humidity sensor, and thus the 3rd field will always be 0.  This is normal.
 
 ## Going Further ##
 * Make a website that tells you the temperature and pressure
